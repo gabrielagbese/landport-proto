@@ -45,7 +45,7 @@ export const AdminPage = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="flex items-center justify-center min-h-screen">
                 <div className="flex items-center space-x-3 text-xl text-gray-600">
                     <RefreshCw className="animate-spin" size={24} />
                     <span>Loading properties...</span>
@@ -61,32 +61,32 @@ export const AdminPage = () => {
     return (
         <div className="min-h-screen bg-gray-50">
             <Header />
-            <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+            <div className="container px-4 py-8 mx-auto">
+                <h1 className="mb-8 text-3xl font-bold text-center text-gray-800">
                     Admin Dashboard
                 </h1>
 
                 {/* Pending Properties Section */}
                 <div>
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-4">Pending Properties:</h2>
+                    <h2 className="mb-4 text-2xl font-semibold text-gray-700">Pending Properties:</h2>
                     {pendingProperties.length === 0 ? (
                         <div className="text-center text-gray-500">No pending properties</div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                             {pendingProperties.map((property) => (
-                                <div key={property.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                                <div key={property.id} className="overflow-hidden bg-white rounded-lg shadow-lg">
                                     <PropertyCard property={property} />
                                     <div className="p-4 bg-gray-100 border-t">
                                         <div className="flex justify-between">
                                             <button
-                                                className="flex items-center bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition-colors"
+                                                className="flex items-center px-4 py-2 text-white transition-colors bg-green-500 rounded hover:bg-green-600"
                                                 onClick={() => handleApproval(property.id, true)}
                                             >
                                                 <CheckCircle2 className="mr-2" size={20} />
                                                 Approve
                                             </button>
                                             <button
-                                                className="flex items-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
+                                                className="flex items-center px-4 py-2 text-white transition-colors bg-red-500 rounded hover:bg-red-600"
                                                 onClick={() => handleApproval(property.id, false)}
                                             >
                                                 <XCircle className="mr-2" size={20} />
@@ -102,16 +102,16 @@ export const AdminPage = () => {
 
                 {/* Approved Properties Section */}
                 <div className="mb-8">
-                    <h2 className="text-2xl font-semibold text-gray-700 mb-4">Approved Properties:</h2>
+                    <h2 className="mb-4 text-2xl font-semibold text-gray-700">Approved Properties:</h2>
                     {approvedProperties.length === 0 ? (
                         <div className="text-center text-gray-500">No approved properties</div>
                     ) : (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                             {approvedProperties.map((property) => (
-                                <div key={property.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                                <div key={property.id} className="overflow-hidden bg-white rounded-lg shadow-lg">
                                     <PropertyCard property={property} buttonType="viewDocument" />
                                     <div className="p-4 bg-gray-100 border-t">
-                                        <div className="flex items-center justify-center text-green-600 font-bold">
+                                        <div className="flex items-center justify-center font-bold text-green-600">
                                             <CheckCircle2 className="mr-2" size={20} />
                                             Approved
                                         </div>
