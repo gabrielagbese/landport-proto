@@ -13,7 +13,7 @@ export const Header = () => {
     };
 
     return (
-        <div className="flex justify-between items-center bg-gray-950 text-3xl font-extrabold text-white p-4  w-full z-10 shadow-lg">
+        <div className="flex justify-between items-center bg-gray-950 text-3xl font-extrabold text-white p-4 top-0 w-full z-10 shadow-lg">
             <div className="text-xl">LandPort</div>
             {user && (
                 <Button onClick={handleLogout} className="bg-red-500 hover:bg-red-700">
