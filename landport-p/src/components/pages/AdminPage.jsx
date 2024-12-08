@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import { collection, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase";
 import PropertyCard from "../PropertyCard";
 import { Header } from "../Header";
@@ -31,17 +31,29 @@ export const AdminPage = () => {
     const handleApproval = async (id, isApproved) => {
         try {
             const propertyRef = doc(firestore, "properties", id);
-            await updateDoc(propertyRef, { isApproved });
-            setProperties((prevProperties) =>
-                prevProperties.map((property) =>
-                    property.id === id ? { ...property, isApproved } : property
-                )
-            );
-            alert(isApproved ? "Property approved!" : "Property rejected.");
+
+            if (isApproved) {
+                // Approve the property
+                await updateDoc(propertyRef, { isApproved });
+                setProperties((prevProperties) =>
+                    prevProperties.map((property) =>
+                        property.id === id ? { ...property, isApproved } : property
+                    )
+                );
+                alert("Property approved!");
+            } else {
+                // Reject and remove the property
+                await deleteDoc(propertyRef); // Removes it from Firestore
+                setProperties((prevProperties) =>
+                    prevProperties.filter((property) => property.id !== id)
+                );
+                alert("Property rejected and removed.");
+            }
         } catch (error) {
             console.error("Error updating property status:", error);
         }
     };
+
 
     if (loading) {
         return (
